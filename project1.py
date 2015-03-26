@@ -1,7 +1,8 @@
 import random
 
 def fileToString(fileName) :
-	fileString = fileName.read()
+	f = open(fileName, "r")
+	fileString = f.read()
 	return fileString
 
 def stringToFile(fileString) :
@@ -14,7 +15,8 @@ def replaceName(letter, oldName, newName) :
 	newLetter = letter.replace(oldName, newName)
 	return newLetter
 
-def replaceWord(letter, wordList, word) :
+def replaceWord(letter, wordListString, word) :
+	wordList = wordListString.split("\n")
 	newLetter = letter.replace(word, random.choice(wordList))
 	return newLetter
 
@@ -65,18 +67,15 @@ def decode(codedLetter) :
 				i = -1
 		else :
 			i += 1
-	print binary
 	
 	secretPhrase = ""
 	binList = [binary[i:i+5] for i in range(0, len(binary), 5)]
-	print binList
 
 	for b in binList :
 		if b == "11111" :
 			break
 		else :
 			secretPhrase += chr(int(b, 2) + ord('a'))
-	print secretPhrase
 
 userInput = 0
 while userInput != 5:
@@ -86,7 +85,7 @@ while userInput != 5:
 	print ("4: Encode\decode secret message")
 	print ("5: Quit")
 	userInput = input("Enter your choice: ")
-	if userInput == "1" :
+	if userInput == 1 :
 		letterFile = input("Enter the letter file name: ")
 		oldName = input("Enter the old name: ")
 		newName = input("Enter the new name: ")
@@ -97,10 +96,10 @@ while userInput != 5:
 			newLetterFile = stringToFile(newLetter)
 		else :
 			break
-	elif userInput == "2" :
+	elif userInput == 2 :
 		letterFile = input("Enter the letter file name: ")
 		wordListFile = input("Enter the word list file name: ")
-		oldWord = input("Enter the oldWord: ")
+		oldWord = input("Enter the old word/phrase: ")
 		newLetter = replaceWord(fileToString(letterFile), fileToString(wordListFile), oldWord)
 		print newLetter
 		yn = input("Would you like to save? (y/n)")
@@ -108,7 +107,7 @@ while userInput != 5:
 			newLetterFile = stringToFile(newLetter)
 		else :
 			break
-	elif userInput == "3" :
+	elif userInput == 3 :
 		letterFile = input("Enter the letter file name: ")
 		oldPhrase = input("Enter the old phrase: ")
 		newPhrase = input("Enter the new phrase: ")
@@ -119,12 +118,12 @@ while userInput != 5:
 			newLetterFile = stringToFile(newLetter)
 		else :
 			break
-	elif userInput == "4" :
+	elif userInput == 4 :
 		print ("1: Encode a letter")
 		print ("2: Decode a letter")
-		userAnswer = ("Enter your choice: ")
+		userAnswer = input("Enter your choice: ")
 
-		if userAnswer == "1" :
+		if userAnswer == 1 :
 			letterFile = input("Enter the letter file name: ")
 			secretPhrase = input("Enter the secret phrase: ")
 			newLetter = encode(fileToString(letterFile), secretPhrase)
@@ -134,7 +133,7 @@ while userInput != 5:
 				newLetterFile = stringToFile(newLetter)
 			else :
 				break
-		elif userAnswer == "2" :
+		elif userAnswer == 2 :
 			letterFile = input("Enter the letter file name: ")
 			newLetter = decode(fileToString(letterFile))
 			print newLetter
@@ -146,7 +145,7 @@ while userInput != 5:
 		else :
 			print ("Invalid input.")
 			break
-	elif userInput == "5" :
+	elif userInput == 5 :
 		print "Good-bye."
 		break
 	else :
