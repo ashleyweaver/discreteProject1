@@ -31,10 +31,10 @@ def encode(letter, secretPhrase) :
 		e = secretPhraseLower[:1]
 		secretPhraseLower = secretPhraseLower[1:]
 		if e.isalpha() :
+			binList = []
 			bin = '{0:05b}'.format(ord(e) - ord('a'))
 			print bin
 			for b in bin :
-				binList = []
 				if b == '0' :
 					binList.append(" ")
 				elif b == '1' :
@@ -55,8 +55,6 @@ def encode(letter, secretPhrase) :
 			codedLetter += letterWords.pop(0)
 		return codedLetter
 
-def decode(codedLetter) :
-	
 
 
 print encode("""This is my test letter. I need to type a lot of words here. 
