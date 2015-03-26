@@ -1,0 +1,14 @@
+Ashley Weaver
+ECE Discrete Mathematics
+Computer Project 1
+March 26, 2015
+
+I wrote my project in Python because it is the language with which I am the most comfortable.  I tried at all times to be as effective as possible.  In particular, my code for the encode and decode functions is as optimized as I could make it.
+
+For encode, I split the original letter on spaces to just get the words with no whitespace. I then iterated throught the phrase to be hidden in the letter and converted each character into its ASCII value, then to binary, then to a pseudo-binary using spaces.  Finally I put these spaces between each word in the list of words from the original letter.  
+
+The decode function was somewhat more difficult.  There's no easy way to get the spaces in a string the same way you can get the words.  I overcame this obstacle by going through the string of the encoded letter character by character and testing if each one was a space. If there was one space, I concatenated a 0 onto a binary string. If there were two spaces, I concatenated a 1 onto the string.  Then I broke the string into five-bit chunks to convert back to an ASCII value and then to a character.
+
+My user interface allows the user to replace names, words, and phrases in the letter of recomendation, as well as encode and decode a secret phrase.  The names of files must be entered as strings, i.e., contained in quotation marks.  The program then prints the edited letter and allows the user to save it under "newLetter.txt" with the changes.
+
+I quite enjoyed this project. It really challenged me to come up with new ways to solve problems I never had encountered before.  Getting the encode and decode methods to work was one of the most satisfying moments I've had during an assignment like this.  I look forward to having more computer projects in this class.
