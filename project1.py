@@ -28,11 +28,11 @@ def encode(letter, secretPhrase) :
 	codedLetter = ""
 	secretPhraseLower = secretPhrase.lower()
 	while len(secretPhraseLower) > 0 :
-		e = secretPhraseLower[:1]
+		l = secretPhraseLower[:1]
 		secretPhraseLower = secretPhraseLower[1:]
-		if e.isalpha() :
+		if l.isalpha() :
 			binList = []
-			bin = '{0:05b}'.format(ord(e) - ord('a'))
+			bin = '{0:05b}'.format(ord(l) - ord('a'))
 			print bin
 			for b in bin :
 				if b == '0' :
@@ -55,9 +55,34 @@ def encode(letter, secretPhrase) :
 			codedLetter += letterWords.pop(0)
 		return codedLetter
 
+def decode(codedLetter) :
+	binary = ""
+	i = -1
+	for l in codedLetter :
+		if l.isspace() == False :
+			if i > -1 :
+				binary += str(i)
+				i = -1
+		else :
+			i += 1
+	print binary
+	
+	secretPhrase = ""
+	binList = [binary[i:i+5] for i in range(0, len(binary), 5)]
+	print binList
+
+	for b in binList :
+		if b == "11111" :
+			break
+		else :
+			secretPhrase += chr(int(b, 2) + ord('a'))
+	print secretPhrase
 
 
-print encode("""This is my test letter. I need to type a lot of words here. 
-				I'm not good at typing words. Words, words, words. This is the 
-				end sentence. Goodbye, cruel world. Adding a few more words 
-				because I can't count.""", "test it")
+letter = """This is my test letter. I need to type a lot of words here. 
+			I'm not good at typing words. Words, words, words. This is the 
+			end sentence. Goodbye, cruel world. Adding a few more words 
+			because I can't count."""
+encoded = encode(letter, "test it")
+print encoded
+print decode(encoded)
