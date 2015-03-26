@@ -78,11 +78,77 @@ def decode(codedLetter) :
 			secretPhrase += chr(int(b, 2) + ord('a'))
 	print secretPhrase
 
+userInput = 0
+while userInput != 5:
+	print ("1: Replace student's name")
+	print ("2: Replace specific word")
+	print ("3: Replace phrase")
+	print ("4: Encode\decode secret message")
+	print ("5: Quit")
+	userInput = input("Enter your choice: ")
+	if userInput == "1" :
+		letterFile = input("Enter the letter file name: ")
+		oldName = input("Enter the old name: ")
+		newName = input("Enter the new name: ")
+		newLetter = replaceName(fileToString(letterFile), oldName, newName)
+		print newLetter
+		yn = input("Would you like to save? (y/n)")
+		if yn == "y" :
+			newLetterFile = stringToFile(newLetter)
+		else :
+			break
+	elif userInput == "2" :
+		letterFile = input("Enter the letter file name: ")
+		wordListFile = input("Enter the word list file name: ")
+		oldWord = input("Enter the oldWord: ")
+		newLetter = replaceWord(fileToString(letterFile), fileToString(wordListFile), oldWord)
+		print newLetter
+		yn = input("Would you like to save? (y/n)")
+		if yn == "y" :
+			newLetterFile = stringToFile(newLetter)
+		else :
+			break
+	elif userInput == "3" :
+		letterFile = input("Enter the letter file name: ")
+		oldPhrase = input("Enter the old phrase: ")
+		newPhrase = input("Enter the new phrase: ")
+		newLetter = replaceName(fileToString(letterFile), oldPhrase, newPhrase)
+		print newLetter
+		yn = input("Would you like to save? (y/n)")
+		if yn == "y" :
+			newLetterFile = stringToFile(newLetter)
+		else :
+			break
+	elif userInput == "4" :
+		print ("1: Encode a letter")
+		print ("2: Decode a letter")
+		userAnswer = ("Enter your choice: ")
 
-letter = """This is my test letter. I need to type a lot of words here. 
-			I'm not good at typing words. Words, words, words. This is the 
-			end sentence. Goodbye, cruel world. Adding a few more words 
-			because I can't count."""
-encoded = encode(letter, "test it")
-print encoded
-print decode(encoded)
+		if userAnswer == "1" :
+			letterFile = input("Enter the letter file name: ")
+			secretPhrase = input("Enter the secret phrase: ")
+			newLetter = encode(fileToString(letterFile), secretPhrase)
+			print newLetter
+			yn = input("Would you like to save? (y/n)")
+			if yn == "y" :
+				newLetterFile = stringToFile(newLetter)
+			else :
+				break
+		elif userAnswer == "2" :
+			letterFile = input("Enter the letter file name: ")
+			newLetter = decode(fileToString(letterFile))
+			print newLetter
+			yn = input("Would you like to save? (y/n)")
+			if yn == "y" :
+				newLetterFile = stringToFile(newLetter)
+			else :
+				break
+		else :
+			print ("Invalid input.")
+			break
+	elif userInput == "5" :
+		print "Good-bye."
+		break
+	else :
+		print ("Invalid input.")
+		break			
